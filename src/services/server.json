@@ -1,0 +1,136 @@
+{
+  "plants_water_frequencies": [
+    {"key": "day", "title": "Everyday"},
+    {"key": "week", "title": "Every week"}
+  ],
+
+  "plants_environments": [
+    {"key": "living_room", "title": "Living Room"},
+    {"key": "bedroom", "title": "Bedroom"},
+    {"key": "kitchen", "title": "Kitchen"},
+    {"key": "bathroom", "title": "Bathroom"}
+  ],
+
+  "plants": [
+    {
+      "id": 1,
+      "name": "Tuftroot",
+      "about": "Is a tropical species that grows fast and easy to take care of.",
+      "water_tips": "keep the earth always humid. irrigate two times a week.",
+      "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/1.svg",
+      "environments": ["living_room", "kitchen"],
+      "frequency": {
+        "times": 2,
+        "repeat_every": "week"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Zanzibar Gem",
+      "about": "Stays beautiful and green the whole year",
+      "water_tips": "Use pots with roles and stones at the bottom. irrigate 1 time a day.",
+      "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/2.svg",
+      "environments": ["living_room", "bedroom"],
+      "frequency": {
+        "times": 1,
+        "repeat_every": "day"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Peperomia",
+      "about": "Prefers indirect light",
+      "water_tips": "In the hotter days spray water on leaves. irrigate 3 times a week.",
+      "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/3.svg",
+      "environments": ["bedroom"],
+      "frequency": {
+        "times": 3,
+        "repeat_every": "week"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Philodendron",
+      "about": "Medium size. Very easy to cultivate",
+      "water_tips": "keep the earth always humid. Irrigate 2 times a week.",
+      "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/4.svg",
+      "environments": ["bedroom", "living_room"],
+      "frequency": {
+        "times": 2,
+        "repeat_every": "week"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Snake plant",
+      "about": "They require very little water and sun, making them perfect for dark rooms and apartments.",
+      "water_tips": "Irrigate around the soil. Irrigate 1 time a day.",
+      "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/5.svg",
+      "environments": ["bedroom", "living_room"],
+      "frequency": {
+        "times": 1,
+        "repeat_every": "day"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Yucca",
+      "about": "They tolerate a range of conditions, but are best grown in full sun.",
+      "water_tips": "Irrigate 1 time a week.",
+      "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/6.svg",
+      "environments": ["kitchen", "bedroom"],
+      "frequency": {
+        "times": 1,
+        "repeat_every": "week"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Fruit tree",
+      "about": "Keep near windows, they need a little bit of sun.",
+      "water_tips": "Irrigate around the soil. Irrigate 3 times a week.",
+      "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/7.svg",
+      "environments": ["kitchen", "living_room"],
+      "frequency": {
+        "times": 3,
+        "repeat_every": "week"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Orchids",
+      "about": "Low-maintenance and doesn't need much space",
+      "water_tips": "Irrigate 4 times a week.",
+      "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/8.svg",
+      "environments": ["bathroom"],
+      "frequency": {
+        "times": 4,
+        "repeat_every": "week"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Viola",
+      "about": "Most species are found in the temperate Northern Hemisphere; however, some are also found in widely divergent areas such as Hawaii, Australasia, and the Andes.",
+      "water_tips": "Irrigate only the soil 2 times a week.",
+      "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/3.svg",
+      "environments": ["bathroom"],
+      "frequency": {
+        "times": 2,
+        "repeat_every": "week"
+      }
+    },
+    {
+      "id": 10,
+      "name": "hydrangea",
+      "about": "It is widely cultivated in many parts of the world in many climates.",
+      "water_tips": "keep the earth always humid. Irrigate 1 time a day.",
+      "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/2.svg",
+      "environments": ["bathroom"],
+      "frequency": {
+        "times": 1,
+        "repeat_every": "day"
+      }
+    }
+  ]
+}
