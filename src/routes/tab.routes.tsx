@@ -13,6 +13,7 @@ const AuthRoutes = () => {
     return(
         <AppTab.Navigator
             screenOptions={{
+                headerShown: false,
                 tabBarActiveTintColor: colors.green,
                 tabBarInactiveTintColor: colors.heading,
                 tabBarLabelPosition: 'beside-icon',
@@ -22,7 +23,7 @@ const AuthRoutes = () => {
                 },
             }}>
                 <AppTab.Screen
-                    name="New Plant"
+                    name="New plant"
                     component={PlantSelect}
                     options={{
                         tabBarIcon: (({ size, color }) => (
@@ -36,7 +37,7 @@ const AuthRoutes = () => {
                 />
 
 <AppTab.Screen
-                    name="My Plant"
+                    name="My Plants"
                     component={MyPlants}
                     options={{
                         tabBarIcon: (({ size, color }) => (
