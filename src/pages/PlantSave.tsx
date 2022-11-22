@@ -40,7 +40,7 @@ export function PlantSave({ navigation }: {navigation: any}){
 
         if(dateTime && isBefore(dateTime, new Date())){
             setSelectedDateTime(new Date());
-            return Alert.alert('Escolha uma hora no futuro! ⏰');
+            return Alert.alert('Choose a time in the future! ⏰');
         }
 
         if(dateTime)
@@ -59,15 +59,15 @@ export function PlantSave({ navigation }: {navigation: any}){
             });
 
             navigation.navigate('Confirmation', {
-                title: 'Tudo certo',
-                subtitle: 'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com muito cuidado.',
-                buttonTitle: 'Muito Obrigado :D',
+                title: 'Everything its ready',
+                subtitle: 'We will always remember you to take care of you plants.',
+                buttonTitle: 'Thank you :D',
                 icon: 'hug',
                 nextScreen: 'MyPlants',
             }); 
 
         } catch {
-            Alert.alert('Não foi possível salvar. 😢');
+            Alert.alert("it wasn't possible to save. 😢");
         }
     }
 
@@ -123,7 +123,7 @@ export function PlantSave({ navigation }: {navigation: any}){
                                 onPress={handleOpenDatetimePickerForAndroid}
                             >
                                 <Text style={styles.dateTimePickerText}>
-                                {`Mudar ${format(selectedDateTime, 'HH:mm')}`}
+                                {`Change ${format(selectedDateTime, 'HH:mm')}`}
                                 </Text>
                             </TouchableOpacity>
                         )
@@ -131,7 +131,7 @@ export function PlantSave({ navigation }: {navigation: any}){
 
 
                     <Button 
-                        title="Cadastrar planta"
+                        title="Register plant"
                         onPress={handleSave}
                     />
                 </View>
