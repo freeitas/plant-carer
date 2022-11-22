@@ -5,6 +5,7 @@ import {
     Text,
     View
 } from 'react-native';
+import { useRoute } from '@react-navigation/core';
 
 import { Button } from '../components/Button';
 
@@ -27,29 +28,38 @@ const emojis = {
 
 export function Confirmation({ navigation }: {navigation: any}){
 
-    
+  const routes = useRoute();
+
+  const {
+      title,
+      subtitle,
+      buttonTitle,
+      icon,
+      nextScreen
+  } = routes.params as Params;
+
     function handleMoveOn(){
-      navigation.navigate('PlantSelect');
+      navigation.navigate(nextScreen);
     }
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
                 <Text style={styles.emoji}>
-                    {emojis.hug}
+                    {emojis[icon]}
                 </Text>
 
                 <Text style={styles.title}>
-                    We are done!
+                    {title}
                 </Text>
 
                 <Text style={styles.subtitle}>
-                    Now we can start to take care of your plants
+                    {subtitle}
                 </Text>                
 
                 <View style={styles.footer}>
                     <Button 
-                        title="Start"
+                        title={buttonTitle}
                         onPress={handleMoveOn}
                     />
                 </View>
