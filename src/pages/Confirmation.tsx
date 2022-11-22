@@ -25,11 +25,11 @@ const emojis = {
 }
 
 
-export function Confirmation(){
+export function Confirmation({ navigation }: {navigation: any}){
 
     
     function handleMoveOn(){
-       
+      navigation.navigate('PlantSelect');
     }
 
     return (

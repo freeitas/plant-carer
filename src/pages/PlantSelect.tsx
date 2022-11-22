@@ -7,7 +7,6 @@ import {
     ActivityIndicator
 } from 'react-native';
 import { EnviromentButton } from '../components/EnviromentButton';
-import { useNavigation } from '@react-navigation/core';
 
 import { Header } from '../components/Header';
 import { PlantCardPrimary } from '../components/PlantCardPrimary';
@@ -25,7 +24,7 @@ interface EnviromentProps {
     title: string;
 }
 
-export function PlantSelect(){
+export function PlantSelect({ navigation }: {navigation: any}){
     const [enviroments, setEnvirtoments] = useState<EnviromentProps[]>([]);
     const [plants, setPlants] = useState<PlantProps[]>([]);
     const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
@@ -34,8 +33,6 @@ export function PlantSelect(){
 
     const [page, setPage] = useState(1);
     const [loadingMore, setLoadingMore] = useState(false);    
-
-    const navigation = useNavigation();
 
     function handleEnrivomentSelected(environment: string){
         setEnviromentSelected(environment);
