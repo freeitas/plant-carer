@@ -1,5 +1,7 @@
 import React from 'react';
-import { SafeAreaView ,View, Text, Image, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
+import {
+  SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, Dimensions,
+} from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 import wateringImg from '../assets/watering.png';
@@ -7,8 +9,7 @@ import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
 export function Welcome({ navigation }: {navigation: any}) {
-
-  function handleStart(){
+  function handleStart() {
     navigation.navigate('UserIdentification');
   }
 
@@ -19,8 +20,8 @@ export function Welcome({ navigation }: {navigation: any}) {
           Take care of your plants easily
         </Text>
 
-        <Image 
-          style={styles.image} 
+        <Image
+          style={styles.image}
           source={wateringImg}
           resizeMode="contain"
         />
@@ -35,14 +36,14 @@ export function Welcome({ navigation }: {navigation: any}) {
           activeOpacity={0.7}
           onPress={handleStart}
         >
-            <Feather 
-              name="chevron-right"
-              style={styles.buttonIcon}
-            />
+          <Feather
+            name="chevron-right"
+            style={styles.buttonIcon}
+          />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around',
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   title: {
     fontSize: 28,
@@ -62,14 +63,14 @@ const styles = StyleSheet.create({
     color: colors.heading,
     marginTop: 38,
     fontFamily: fonts.heading,
-    lineHeight: 34
+    lineHeight: 34,
   },
   subtitle: {
     textAlign: 'center',
     fontSize: 18,
     paddingHorizontal: 20,
     color: colors.heading,
-    fontFamily: fonts.text
+    fontFamily: fonts.text,
   },
   button: {
     backgroundColor: colors.green,
@@ -81,10 +82,10 @@ const styles = StyleSheet.create({
     width: 56,
   },
   image: {
-    height: Dimensions.get('window').width * 0.7
+    height: Dimensions.get('window').width * 0.7,
   },
   buttonIcon: {
     fontSize: 24,
-    color: colors.white
-  }
-})
+    color: colors.white,
+  },
+});

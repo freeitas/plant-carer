@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback,
   Platform,
   Keyboard,
-  Alert
+  Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -22,58 +22,58 @@ export function UserIdentification({ navigation }: {navigation: any}) {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const [name, setName] = useState<string>();
-  
-  function handleInputBlur(){
-    setIsFocused(false);  
+
+  function handleInputBlur() {
+    setIsFocused(false);
   }
 
-  function handleInputFocus(){
-    setIsFocused(true)
+  function handleInputFocus() {
+    setIsFocused(true);
   }
 
-  function handleInputChange(value: string){
+  function handleInputChange(value: string) {
     setIsFilled(!!value);
     setName(value);
-  }   
-
-  async function handleSubmit(){
-    if(!name) {
-      return Alert.alert('How can i call you? 😢');
-    }
-    
-    try{
-      await AsyncStorage.setItem('@plantmanager:user', name);
-      navigation.navigate('PlantSelect');        
-    }catch{
-        Alert.alert('It was not possible to save your name. 😢');
-    }
-
-      navigation.navigate('Confirmation');
   }
 
-  return(
+  async function handleSubmit() {
+    if (!name) {
+      return Alert.alert('How can i call you? 😢');
+    }
+
+    try {
+      await AsyncStorage.setItem('@plantmanager:user', name);
+      navigation.navigate('PlantSelect');
+    } catch {
+      Alert.alert('It was not possible to save your name. 😢');
+    }
+
+    return navigation.navigate('Confirmation');
+  }
+
+  return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         style={styles.container}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height' }
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.content}>
-          <View style={styles.form}>
+          <View style={styles.content}>
+            <View style={styles.form}>
               <View style={styles.header}>
                 <Text style={styles.emoji}>
-                { isFilled ? '😄' : '😀' }
+                  { isFilled ? '😄' : '😀' }
                 </Text>
                 <Text style={styles.title}>
                   What should we call you?
                 </Text>
               </View>
 
-              <TextInput 
+              <TextInput
                 style={[
                   styles.input,
-                  (isFocused || isFilled) && 
-                  { borderColor: colors.green}
+                  (isFocused || isFilled)
+                  && { borderColor: colors.green },
                 ]}
                 placeholder="Type your name"
                 onBlur={handleInputBlur}
@@ -82,17 +82,17 @@ export function UserIdentification({ navigation }: {navigation: any}) {
               />
 
               <View style={styles.footer}>
-                  <Button  
-                    title="Confirm"
-                    onPress={handleSubmit}
-                  />
+                <Button
+                  title="Confirm"
+                  onPress={handleSubmit}
+                />
               </View>
+            </View>
           </View>
-        </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -104,19 +104,19 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    width: '100%'
+    width: '100%',
   },
   form: {
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 54,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   header: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   emoji: {
-    fontSize: 44
+    fontSize: 44,
   },
   input: {
     borderBottomWidth: 1,
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 50,
     padding: 10,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   title: {
     fontSize: 24,
@@ -134,11 +134,11 @@ const styles = StyleSheet.create({
     color: colors.heading,
     fontFamily: fonts.heading,
     lineHeight: 32,
-    marginTop: 20
+    marginTop: 20,
   },
   footer: {
     width: '100%',
     marginTop: 40,
-    paddingHorizontal: 20
-  }
-})
+    paddingHorizontal: 20,
+  },
+});
