@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   Platform,
   Keyboard,
+  Alert,
   Pressable,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -20,14 +21,18 @@ import { Button } from "../components/Button";
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
 
-export function UserIdentification({ navigation }: { navigation: any }) {
+export function UserNewAccount({ navigation }: { navigation: any }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [isFocusedUsername, setIsFocusedUsername] = useState(false);
   const [isFocusedPassword, setIsFocusedPassword] = useState(false);
+  const [isFocusedPasswordConfirm, setIsFocusedPasswordConfirm] = useState(false);
   const [errorUsername, setErrorUsername] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
+  const [errorPasswordConfirm, setErrorPasswordConfirm] = useState("");
   const [visiblePassword, setVisiblePassword] = useState(false);
+  const [visiblePasswordConfirm, setVisiblePasswordConfirm] = useState(false);
 
   const handleInputBlurUsername = () => {
     setIsFocusedUsername(false);
@@ -35,6 +40,10 @@ export function UserIdentification({ navigation }: { navigation: any }) {
 
   const handleInputBlurPassword = () => {
     setIsFocusedPassword(false);
+  };
+
+  const handleInputBlurPasswordConfirm = () => {
+    setIsFocusedPasswordConfirm(false);
   };
 
   const handleInputFocusUsername = () => {
@@ -45,39 +54,70 @@ export function UserIdentification({ navigation }: { navigation: any }) {
     setIsFocusedPassword(true);
   };
 
+  const handleInputFocusPasswordConfirm = () => {
+    setIsFocusedPasswordConfirm(true);
+  };
+
   const iconPassword = !visiblePassword ? "eye-off" : "eye";
+  const iconPasswordConfirm = !visiblePasswordConfirm ? "eye-off" : "eye";
 
   const handleSubmit = async () => {
-    const getUsername = await AsyncStorage.getItem("@plantmanager:user");
-    const getPassword = await AsyncStorage.getItem("@plantmanager:password");
-
     if (!username) {
       setErrorUsername("username is required");
-    } else if (username !== getUsername) {
-      setErrorUsername("username doesn't exist");
     } else {
       setErrorUsername("");
     }
 
     if (!password) {
       setErrorPassword("password is required");
-    } else if (password !== getPassword) {
-      setErrorPassword("password is not correct");
     } else {
       setErrorPassword("");
     }
 
-    if (username === getUsername && password === getPassword) {
-      navigation.navigate("Confirmation");
+    if (!passwordConfirm) {
+      setErrorPasswordConfirm("password is required");
+    } else {
+      setErrorPasswordConfirm("");
+    }
+
+    if (password !== passwordConfirm) {
+      setErrorPassword("password aren't the same");
+      setErrorPasswordConfirm("password aren't the same");
+    }
+
+    if (username && password && password === passwordConfirm) {
+      Alert.alert("User sign up with success");
+      navigation.navigate("UserIdentification");
+      setUsername("");
+      setPassword("");
+      setPasswordConfirm("");
+    }
+
+    try {
+      await AsyncStorage.setItem("@plantmanager:user", username);
+      await AsyncStorage.setItem("@plantmanager:password", password);
+    } catch (error) {
+      Alert.alert("Error saving data" + error);
     }
   };
 
-  const newAccount = async () => {
-    navigation.navigate("UserNewAccount");
+  const goBack = () => {
+    navigation.navigate("UserIdentification");
     setUsername("");
     setPassword("");
+    setPasswordConfirm("");
     setErrorUsername("");
     setErrorPassword("");
+    setErrorPasswordConfirm("");
+  };
+
+  const clearLocalStorage = async () => {
+    try {
+      AsyncStorage.clear();
+      Alert.alert("Cleared");
+    } catch (error) {
+      Alert.alert("Error" + error);
+    }
   };
 
   return (
@@ -90,7 +130,7 @@ export function UserIdentification({ navigation }: { navigation: any }) {
           <View style={styles.content}>
             <View style={styles.form}>
               <View style={styles.header}>
-                <Text style={styles.title}>Login</Text>
+                <Text style={styles.title}>New Account</Text>
               </View>
 
               <TextInput
@@ -111,7 +151,7 @@ export function UserIdentification({ navigation }: { navigation: any }) {
                 <Text style={styles.error}>{errorUsername}</Text>
               )}
 
-              <View style={styles.containerInput}>
+              <View>
                 <TextInput
                   style={[
                     styles.input,
@@ -137,14 +177,43 @@ export function UserIdentification({ navigation }: { navigation: any }) {
                 )}
               </View>
 
-              <View style={styles.footer}>
-                <Button title="Sign in" onPress={handleSubmit} />
+              <View>
+                <TextInput
+                  style={[
+                    styles.input,
+                    isFocusedPasswordConfirm && {
+                      borderColor: colors.green,
+                    },
+                  ]}
+                  placeholder="Type your password confirm"
+                  value={passwordConfirm}
+                  onBlur={handleInputBlurPasswordConfirm}
+                  onFocus={handleInputFocusPasswordConfirm}
+                  autoCapitalize={"none"}
+                  onChangeText={(text) => setPasswordConfirm(text)}
+                  secureTextEntry={!visiblePasswordConfirm}
+                />
+                <MaterialCommunityIcons
+                  name={iconPasswordConfirm}
+                  style={styles.icon}
+                  onPress={() => setVisiblePasswordConfirm(!visiblePasswordConfirm)}
+                />
+                {errorPasswordConfirm.length > 0 && (
+                  <Text style={styles.error}>{errorPasswordConfirm}</Text>
+                )}
               </View>
 
-              <Pressable onPress={newAccount}>
-                <Text style={styles.newAccount}>
-                  New account? <Text style={styles.signup}>Sign up</Text>
+              <View style={styles.footer}>
+                <Button title="Sign up" onPress={handleSubmit} />
+              </View>
+              <Pressable onPress={goBack}>
+                <Text style={styles.account}>
+                  Already have an account?{" "}
+                  <Text style={styles.goback}>Go back</Text>
                 </Text>
+              </Pressable>
+              <Pressable onPress={clearLocalStorage}>
+                <Text style={styles.clear}>clear storage</Text>
               </Pressable>
             </View>
           </View>
@@ -180,9 +249,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.heading,
     marginBottom: 35,
   },
-  containerInput: {
-    position: "relative",
-  },
   input: {
     position: "relative",
     borderBottomWidth: 1,
@@ -210,13 +276,19 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 50,
   },
-  newAccount: {
+  account: {
     color: colors.heading,
     fontFamily: fonts.text,
     textAlign: "center",
     marginTop: 50,
   },
-  signup: {
+  goback: {
     fontFamily: fonts.heading,
+  },
+  clear: {
+    color: colors.heading,
+    fontFamily: fonts.text,
+    textAlign: "center",
+    marginTop: 50,
   },
 });
