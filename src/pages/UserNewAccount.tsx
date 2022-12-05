@@ -111,15 +111,6 @@ export function UserNewAccount({ navigation }: { navigation: any }) {
     setErrorPasswordConfirm("");
   };
 
-  const clearLocalStorage = async () => {
-    try {
-      AsyncStorage.clear();
-      Alert.alert("Cleared");
-    } catch (error) {
-      Alert.alert("Error" + error);
-    }
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -212,9 +203,6 @@ export function UserNewAccount({ navigation }: { navigation: any }) {
                   <Text style={styles.goback}>Go back</Text>
                 </Text>
               </Pressable>
-              <Pressable onPress={clearLocalStorage}>
-                <Text style={styles.clear}>clear storage</Text>
-              </Pressable>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -284,11 +272,5 @@ const styles = StyleSheet.create({
   },
   goback: {
     fontFamily: fonts.heading,
-  },
-  clear: {
-    color: colors.heading,
-    fontFamily: fonts.text,
-    textAlign: "center",
-    marginTop: 50,
   },
 });
