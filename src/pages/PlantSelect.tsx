@@ -96,9 +96,7 @@ export function PlantSelect({ navigation }: { navigation: any }) {
     fetchPlants();
   }, []);
 
-  function searchFilter(text: any) {
-    const data = allPlants;
-    
+  function searchFilter(text: any) {    
     if (text) {
       const newData = plants.filter(function (item) {
         const itemData = item.name ? item.name.toUpperCase() : "".toUpperCase();
@@ -108,8 +106,8 @@ export function PlantSelect({ navigation }: { navigation: any }) {
       setSearch(text);
       setFilteredPlants(newData);
     } else {
-      setSearch(data);
-      setFilteredPlants(data);
+      setSearch(text);
+      setFilteredPlants(plants);
     }
   }
 
