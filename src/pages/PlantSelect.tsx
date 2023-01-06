@@ -32,7 +32,6 @@ export function PlantSelect({ navigation }: { navigation: any }) {
   const [enviromentSelected, setEnviromentSelected] = useState("all");
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
 
@@ -115,12 +114,12 @@ export function PlantSelect({ navigation }: { navigation: any }) {
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.header}>
         <Header />
         <Text style={styles.title}>Em qual ambiente</Text>
         <Text style={styles.subtitle}>você quer colocar sua planta?</Text>
       </View>
-
+      
       <TextInput
         style={styles.inputSearch}
         value={search}
@@ -141,6 +140,7 @@ export function PlantSelect({ navigation }: { navigation: any }) {
           )}
           horizontal
           showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.enviromentList}
         />
       </View>
 
@@ -174,19 +174,34 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    padding: 25,
+  },
+  header: {
+    paddingHorizontal: 30,
   },
   title: {
-    fontFamily: fonts.heading,
+    fontSize: 17,
     color: colors.heading,
-    fontSize: 18,
+    fontFamily: fonts.heading,
     lineHeight: 20,
+    marginTop: 15,
   },
   subtitle: {
     fontFamily: fonts.text,
-    color: colors.heading,
-    fontSize: 18,
+    fontSize: 17,
     lineHeight: 20,
+    color: colors.heading,
+  },
+  enviromentList: {
+    height: 40,
+    justifyContent: "center",
+    paddingBottom: 5,
+    marginLeft: 32,
+    marginVertical: 32,
+    paddingRight: 32,
+  },
+  plants: {
+    flex: 1,
+    paddingHorizontal: 32,
   },
   inputSearch: {
     color: colors.heading,
@@ -197,11 +212,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     fontSize: 16,
     borderRadius: 6,
-    marginVertical: 20,
-  },
-  plants: {
-    flex: 1,
-    width: "100%",
-    justifyContent: "center",
+    marginTop: 20,
+    marginHorizontal: 30,
   },
 });
