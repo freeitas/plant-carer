@@ -5,6 +5,7 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
+  TextInput,
 } from "react-native";
 import { EnviromentButton } from "../components/EnviromentButton";
 
@@ -30,7 +31,7 @@ export function PlantSelect({ navigation }: { navigation: any }) {
   const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
   const [enviromentSelected, setEnviromentSelected] = useState("all");
   const [loading, setLoading] = useState(true);
-
+  const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
 
@@ -94,16 +95,37 @@ export function PlantSelect({ navigation }: { navigation: any }) {
     fetchPlants();
   }, []);
 
+  function searchFilter(text: any) {    
+    if (text) {
+      const newData = plants.filter(function (item) {
+        const itemData = item.name ? item.name.toUpperCase() : "".toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setSearch(text);
+      setFilteredPlants(newData);
+    } else {
+      setSearch(text);
+      setFilteredPlants(plants);
+    }
+  }
+
   if (loading) return <Load />;
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Header />
-
         <Text style={styles.title}>Em qual ambiente</Text>
         <Text style={styles.subtitle}>você quer colocar sua planta?</Text>
       </View>
+      
+      <TextInput
+        style={styles.inputSearch}
+        value={search}
+        onChangeText={(text) => searchFilter(text)}
+        placeholder="Search ..."
+      />
 
       <View>
         <FlatList
@@ -130,6 +152,7 @@ export function PlantSelect({ navigation }: { navigation: any }) {
             <PlantCardPrimary
               data={item}
               onPress={() => handlePlantSelect(item)}
+              key={item.id}
             />
           )}
           showsVerticalScrollIndicator={false}
@@ -179,6 +202,17 @@ const styles = StyleSheet.create({
   plants: {
     flex: 1,
     paddingHorizontal: 32,
-    justifyContent: "center",
+  },
+  inputSearch: {
+    color: colors.heading,
+    fontFamily: fonts.text,
+    height: 40,
+    borderWidth: 1,
+    borderColor: colors.shape,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    borderRadius: 6,
+    marginTop: 20,
+    marginHorizontal: 30,
   },
 });
